@@ -17,7 +17,7 @@ remote_console_public_ssh_key = ""
 # cluster_name = "spectrum-cluster"
 
 # (optional) uri of scripts folder
-# scripts_path_uri = "https://raw.githubusercontent.com/chenxpcn/spectrum-lsf-ibmcloud/master/scripts"
+# scripts_path_uri = "https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts"
 scripts_path_uri = ""
 
 # (required) uri of installer package

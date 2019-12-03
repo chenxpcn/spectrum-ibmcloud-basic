@@ -21,7 +21,7 @@ Once the compute node can't cover the job load, the Resource Connector / Host Fa
 1. Open [Schematics dashboard](https://cloud.ibm.com/schematics).
 2. Click the button **Create a workspace**
 3. Fill **Workspace name** with a name for the workspace 
-4. Fill **GitHub or GitLab repository URL** with the URL of this template Git repository, say https://github.com/chenxpcn/spectrum-lsf-ibmcloud
+4. Fill **GitHub or GitLab repository URL** with the URL of this template Git repository, say https://github.com/chenxpcn/spectrum-ibmcloud-basic
 5. Click button **Retrieve input variables**, fill values for variables.  Refrence following table for the detail information about variables.
 6. Click button **Create** at right side of the page.
 
@@ -71,7 +71,7 @@ To run this project locally:
 |compute_disk|the size of disk in GBytes on compute node|25|
 |compute_network_speed|the network interface speed in Mbps for the compute nodes|100|
 |remote_console_public_ssh_key|The public key contents for the SSH keypair of remote console for access cluster node||
-|scripts_path_uri|the URI of scripts folder for the template|https://raw.githubusercontent.com/chenxpcn/spectrum-lsf-ibmcloud/master/scripts|
+|scripts_path_uri|the URI of scripts folder for the template|https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts|
 |installer_uri|the URI of LSF Enterprise Suite installer package||
 |entitlement_uri| the URI of IBM Spectrum Symphony entitlement file (this is meaningless for LSF)|n/a|
 |cluster_admin_password|the password for administrator user **lsfadmin** for LSF, **egoadmin** for Symphony||

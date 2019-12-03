@@ -113,7 +113,7 @@ variable "remote_console_public_ssh_key" {
 variable "scripts_path_uri" {
   type = "string"
   description = "URI of scripts folder"
-  default = "https://raw.githubusercontent.com/chenxpcn/spectrum-lsf-ibmcloud/master/scripts"
+  default = "https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts"
 }
 
 variable "installer_uri" {
