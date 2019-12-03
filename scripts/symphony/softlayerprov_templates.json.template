@@ -1,0 +1,24 @@
+{
+    "templates": [
+        {
+            "templateId": "Template-VM-SYMA",
+            "maxNumber": 10,
+            "attributes": {
+                "type": ["String", "X86_64"],
+                "ncpus": ["Numeric", "COMPUTE_CORES"],
+                "ncores": ["Numeric", "1"],
+                "nram": ["Numeric", "COMPUTE_MEM"]
+            },
+            "imageId": "IMAGE_NAME",
+            "datacenter": "DATA_CENTER",
+            "vlanId": "PRIVATE_VLAN_ID",
+            "creationDate":"",
+            "useHourlyPricing": true,
+            "localDiskFlag": false,
+            "privateNetworkOnlyFlag": true,
+            "dedicatedAccountHostOnlyFlag": false,
+            "hostPrefix": "compute-",
+            "postProvisionURL": "POST_PROVISION_SCRIPT"
+        }
+    ]
+}

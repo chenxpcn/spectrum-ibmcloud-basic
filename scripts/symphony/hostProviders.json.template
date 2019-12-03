@@ -1,0 +1,10 @@
+{
+    "providers":[
+        {
+            "name": "ibmcloud",
+            "enabled": 1,
+            "confPath": "/opt/ibm/spectrumcomputing/eservice/hostfactory/conf/providers/softlayer/conf/",
+            "scriptPath": "/opt/ibm/spectrumcomputing/3.8/hostfactory/providers/softlayer/scripts/"
+        }
+    ]
+}
