@@ -220,6 +220,10 @@ resource "null_resource" "post-install-master" {
     ]
   }
 
+  provisioner "local-exec" {
+    command = "rm -f ${local.master_ssh_key_file_name} ${local.master_ssh_key_file_name}.pub"
+  }
+
   depends_on = ["null_resource.install-master","null_resource.install-compute"]
 }
 
@@ -236,6 +240,10 @@ resource "null_resource" "post-install-compute" {
       ". /root/installer/post-install.sh compute ${local.parameters}",
       ". /root/installer/clean.sh compute",
     ]
+  }
+
+  provisioner "local-exec" {
+    command = "rm -f ${local.compute_ssh_key_file_name} ${local.compute_ssh_key_file_name}.pub"
   }
 
   depends_on = ["null_resource.post-install-master"]
