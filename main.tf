@@ -2,12 +2,11 @@ locals {
   MASTER_HOST = "master-host"
   COMPUTE_HOST = "compute-host"
   product_name = "${var.spectrum_product == "symphony" ? "symphony" : "lsf"}"
-  scripts_uri = "${var.scripts_path_uri} == "" ? "https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts" : ${var.scripts_path_uri}"
   deployer_ssh_key_file_name = "deployer-ssh-key"
   master_ssh_key_file_name = "spectrum-master-ssh-key"
   compute_ssh_key_file_name = "spectrum-compute-ssh-key"
   param_list = [
-                "${local.scripts_uri}",
+                "${var.scripts_path_uri}",
                 "${var.installer_uri}",
                 "${var.entitlement_uri}",
                 "${base64encode(var.cluster_admin_password)}",
@@ -127,7 +126,7 @@ resource "null_resource" "pre-install-master" {
     inline  = [
       "mkdir -p /root/installer",
       "mkdir -p /root/logs",
-      "wget -nv -nH -c --no-check-certificate -O /root/installer/downloads.sh ${local.scripts_uri}/${local.product_name}/downloads.sh",
+      "wget -nv -nH -c --no-check-certificate -O /root/installer/downloads.sh ${var.scripts_path_uri}/${local.product_name}/downloads.sh",
       ". /root/installer/downloads.sh master ${local.parameters}",
       ". /root/installer/pre-install.sh master ${local.parameters}",
     ]
@@ -163,7 +162,7 @@ resource "null_resource" "pre-install-compute" {
     inline  = [
       "mkdir -p /root/installer",
       "mkdir -p /root/logs",
-      "wget -nv -nH -c --no-check-certificate -O /root/installer/downloads.sh ${local.scripts_uri}/${local.product_name}/downloads.sh",
+      "wget -nv -nH -c --no-check-certificate -O /root/installer/downloads.sh ${var.scripts_path_uri}/${local.product_name}/downloads.sh",
       ". /root/installer/downloads.sh compute ${local.parameters}",
       ". /root/installer/pre-install.sh compute ${local.parameters}",
     ]
