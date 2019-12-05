@@ -1,9 +1,9 @@
 locals {
   MASTER_HOST = "master-host"
   COMPUTE_HOST = "compute-host"
-  DEFAULT_SCRIPT_URI = "https://https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts"
+  DEFAULT_SCRIPTS_URI = "https://https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts"
   product_name = "${var.spectrum_product == "symphony" ? "symphony" : "lsf"}"
-  script_uri = "${var.scripts_path_uri} == "" ? ${local.DEFAULT_SCRIPT_URI} : ${var.scripts_path_uri}"
+  scripts_uri = "${var.scripts_path_uri == "" ? local.DEFAULT_SCRIPTS_URI : var.scripts_path_uri}"
   deployer_ssh_key_file_name = "deployer-ssh-key"
   master_ssh_key_file_name = "spectrum-master-ssh-key"
   compute_ssh_key_file_name = "spectrum-compute-ssh-key"
