@@ -26,22 +26,6 @@ export >> "$LOG_FILE"
 
 if [ "$ROLE" == "master" ]
 then
-    if [ -n "COMPUTE_INSTANCE_ID" ]
-    then
-        LOG "Archive and remove installer and logs from compute host before create image template"
-        ssh -o "StrictHostKeyChecking no" root@$COMPUTE_PRIVATE_IP "tar cfz compute-archive.tgz installer logs; rm -fr installer logs"
-        scp -q root@$COMPUTE_PRIVATE_IP:/root/compute-archive.tgz /root/installer/
-
-        LOG "Start to create image template $IMAGE_NAME ..."
-        /root/installer/capture-image.sh $SL_USER $SL_APIKEY $COMPUTE_INSTANCE_ID $IMAGE_NAME $COMPUTE_PRIVATE_IP
-
-        sleep 15
-        
-        LOG "Restore installer and logs on compute host"
-        scp -q /root/installer/compute-archive.tgz root@$COMPUTE_PRIVATE_IP:/root/
-        ssh root@$COMPUTE_PRIVATE_IP "tar xfz compute-archive.tgz; rm -f compute-archive.tgz"
-    fi
-
     LOG "RC configuration directory is $LSF_ENVDIR/resource_connector/softlayer/conf"
 
     LOG "Set provioning.sh"

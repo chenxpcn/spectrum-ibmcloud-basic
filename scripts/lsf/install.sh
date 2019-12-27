@@ -2,10 +2,10 @@
 
 export ROLE=$1
 export ADMIN_PASSWORD=`echo $5 | base64 -d`
-export COMPUTE_HOSTNAME=$9
+export MASTER_HOSTNAME=$7
 export CLUSTERNAME=${12}
 
-export COMPUTE_HOSTNAME_SHORT=`echo $COMPUTE_HOSTNAME | cut -d '.' -f 1`
+export MASTER_HOSTNAME_SHORT=`echo $MASTER_HOSTNAME | cut -d '.' -f 1`
 
 LOG_FILE=/root/logs/install-$ROLE.log
 function LOG()
@@ -19,20 +19,19 @@ export >> "$LOG_FILE"
 
 if [ "$ROLE" == "master" ]
 then
-    LOG "Extract deployer ..."
-    chmod 744 /root/installer/lsfsent-x86_64.bin
-    echo "1" > /root/installer/select_yes
-    echo  >> /root/installer/select_yes
-    /root/installer/lsfsent-x86_64.bin < /root/installer/select_yes >> "$LOG_FILE"
-    rm -f /root/installer/select_yes
-
     cd /opt/ibm/lsf_installer/playbook
 
     LOG "Modify lsf-config.yml"
     sed -i 's/my_cluster_name: myCluster/my_cluster_name: '${CLUSTERNAME}'/' lsf-config.yml
 
     LOG "Modify lsf-inventory"
-    sed -i '/\[LSF_Servers\]/a\'$COMPUTE_HOSTNAME_SHORT'' lsf-inventory
+    sed -i 's/<master>/'$MASTER_HOSTNAME_SHORT'/g' lsf-inventory
+
+    LOG "Modify group_vars/all"
+    sed -i 's/lsf-master-only.lsf.spectrum/'$MASTER_HOSTNAME_SHORT'/' group_vars/all
+
+    LOG "Start httpd"
+    httpd -k start
 
     LOG "Perform pre-install checking"
     ansible-playbook -i lsf-inventory lsf-config-test.yml>/root/logs/lsf-config-test.log
@@ -72,11 +71,7 @@ then
     passwd lsfadmin < /root/lsfadmin_password >> "$LOG_FILE"
     rm -f /root/lsfadmin_password
 else
-    LOG "Modify /opt/ibm/lsfsuite/lsf/conf/ego/$CLUSTERNAME/kernel/ego.conf"
-    sed -i 's/EGO_GETCONF=lim/EGO_GET_CONF=lim/' /opt/ibm/lsfsuite/lsf/conf/ego/$CLUSTERNAME/kernel/ego.conf
-
-    LOG "add rc_account to .bash_profile"
-    echo "export rc_account=lsf-demo-dynamic-host">>/root/.bash_profile
+    LOG "No action is required for this step."
 fi
 
 LOG "Complete install.sh for $ROLE."

@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export ROLE=$1
-export REMOTE_CONSOLE_SSH_KEY=`echo $6 | base64 -d`
 export MASTER_HOSTNAME=$7
 export MASTER_PRIVATE_IP=$8
 export COMPUTE_HOSTNAME=$9
@@ -26,21 +25,9 @@ chmod 644 /root/.ssh/id_rsa.pub
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 if [ "$ROLE" == "master" ]
 then
-    cat /root/.ssh/compute-host.pub >> /root/.ssh/authorized_keys
-    rm -f /root/.ssh/compute-host.pub
-
-    LOG "Add remote console SSH key"
-    echo $REMOTE_CONSOLE_SSH_KEY >> /root/.ssh/authorized_keys
-
     LOG "Set /etc/hosts"
     echo $COMPUTE_PRIVATE_IP $COMPUTE_HOSTNAME $COMPUTE_HOSTNAME_SHORT >> /etc/hosts
-
-    LOG "install yum-utils"
-    yum -y install yum-utils >> $LOG_FILE
 else
-    cat /root/.ssh/master-host.pub >> /root/.ssh/authorized_keys
-    rm -f /root/.ssh/master-host.pub
-
     LOG "Set /etc/hosts"
     echo $MASTER_PRIVATE_IP $MASTER_HOSTNAME $MASTER_HOSTNAME_SHORT >> /etc/hosts
 fi

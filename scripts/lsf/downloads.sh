@@ -26,20 +26,10 @@ wget -nv -nH -c --no-check-certificate -O /root/installer/clean.sh $SCRIPTS_URI/
 
 if [ "$ROLE" == "master" ]
 then
-    LOG "wget -nv -nH -c --no-check-certificate -O lsfsent-x86_64.bin $INSTALLER_URI"
-    wget -nv -nH -c --no-check-certificate -O /root/installer/lsfsent-x86_64.bin $INSTALLER_URI
-
-    LOG "wget -nv -nH -c --no-check-certificate -O /root/installer/capture-image.sh $SCRIPTS_URI/capture-image.sh"
-    wget -nv -nH -c --no-check-certificate -O /root/installer/capture-image.sh $SCRIPTS_URI/capture-image.sh
-
-    LOG "wget -nv -nH -c --no-check-certificate -O /root/installer/capture-image.py $SCRIPTS_URI/capture-image.py"
-    wget -nv -nH -c --no-check-certificate -O /root/installer/capture-image.py $SCRIPTS_URI/capture-image.py
-
     LOG "wget -nv -nH -c --no-check-certificate -O /root/installer/provisioning.sh $SCRIPTS_URI/provisioning.sh"
     wget -nv -nH -c --no-check-certificate -O /root/installer/provisioning.sh $SCRIPTS_URI/provisioning.sh
-
-    chmod u+x /root/installer/*.sh
 fi
 
+chmod u+x /root/installer/*.sh
 
 LOG "Complete download script for $ROLE."
