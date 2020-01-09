@@ -13,52 +13,24 @@ remote_console_public_ssh_key = ""
 # (optional) Spectrum product need to be installed, either symphony or lsf
 # spectrum_product = "symphony"
 
-# (optional) Symphony / LSF cluster name
-# cluster_name = "spectrum-cluster"
-
-# (optional) uri of scripts folder
-# scripts_path_uri = "https://raw.githubusercontent.com/chenxpcn/spectrum-ibmcloud-basic/master/scripts"
-scripts_path_uri = ""
-
-# (required) uri of installer package
-# installer_uri = "http://<http_server_ip>/suite/lsfsent10.2.0.8-x86_64.bin"
-installer_uri = ""
-
-# (required) uri of entitlement file
-# entitlement_uri = "http://<http_server_ip>/entitlements/sym_adv_ev_entitlement.dat"
-entitlement_uri = ""
-
-# (required) password for cluster administrator
-# cluster_admin_password = "spectrumpassw0rd"
-cluster_admin_password = ""
-
-# (optional) domain name for master host and compute host
-# domain_name = "spectrum.ibmcloud"
-
 # (required) data center where master host and compute host will be provisioned
 # data_center = "dal13"
 data_center = ""
 
-# (required) public vlan id for master host
+# (optional) public vlan id for master host
 # public_vlan_id = "2317207"
-public_vlan_id = ""
 
-# (required) private vlan id for both master host and compute host
+# (optional) private vlan id for both master host and compute host
 # private_vlan_id = "2317209"
-private_vlan_id = ""
 
-# (required) private vlan number for both master host and compute host
+# (optional) private vlan number for both master host and compute host
 # private_vlan_number = "1207"
-private_vlan_number = ""
 
 # (optional) cpu cores for master host
 # master_cores = "4"
 
 # (optional) memory in MBytes on master host
 # master_memory = "32768"
-
-# (optional) disk size in GBytes on master host
-# master_disk = "100"
 
 # (optional) network speed in Mbps on master host
 # master_network_speed = "100"
@@ -69,11 +41,12 @@ private_vlan_number = ""
 # (optional) memory in MBytes on compute host
 # compute_memory = "4096"
 
-# (optional) disk size in GBytes on compute host
-# compute_disk = "25"
-
 # (optional) network speed in Mbps on compute host
 # compute_network_speed = "100"
 
 # (optional) image name for dynamic host, the image is come from compute host
 # image_name = "SpectrumClusterDynamicHostImage"
+
+# (required) the content of entitlement file, use '\n' to separate lines
+# entitlement = "LSF_Suite_for_Enterprise   10.1   ()   ()   ()   ()   0123456789abcdef"
+# entitlement = "ego_base   3.8   30/11/2020   ()   ()   ()   0123456789abcdef\nsym_advanced_edition   7.3   30/11/2020   ()   ()   ()   fedcba9876543210"
